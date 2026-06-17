@@ -12,7 +12,6 @@ async def plan_searches(query:str):
 async def perform_Searches(searchplan:WebSearchPlan):
     """use the search() function to search for each term"""
     print("performing the searches..")
-    # print(searchplan)
     results = []
     for item in searchplan.searchplan:
         results.append( await search(item))
@@ -39,7 +38,6 @@ async def emailsender(reports:reportSchema):
 
 async def main():
     query = "top 6 agentic ai frameworks of 2026"
-    # query= input("Enter the topic you want to search about")
     searchplan =  await plan_searches(query)
     searchresults = await perform_Searches(searchplan)
     report = await write_report(query,searchresults)

@@ -11,10 +11,10 @@ import resend
 load_dotenv(override=True)
 
 
-groq_client = AsyncOpenAI(base_url="https://api.groq.com/openai/v1", api_key=os.getenv("GROQ_API_KEY"))
+groq_client = AsyncOpenAI(base_url=os.getenv("GROQ_BASE_URL"), api_key=os.getenv("GROQ_API_KEY"))
 gemini_client= AsyncOpenAI(base_url=os.getenv("GEMINI_BASE_URL"),api_key=os.getenv("GEMINI_API_KEY"))
 ollama_client = AsyncOpenAI(base_url=os.getenv("OLLAMA_BASE_URL"), api_key=os.getenv("OLLAMA_API_KEY"))
-openrouter_client = AsyncOpenAI(base_url="https://openrouter.ai/api/v1",api_key=os.getenv("OPENROUTER_API_KEY"))
+openrouter_client = AsyncOpenAI(base_urL=os.getenv("OPENROUTER_BASE_URL"),api_key=os.getenv("OPENROUTER_API_KEY"))
 model1 = OpenAIChatCompletionsModel(model="meta-llama/llama-4-scout-17b-16e-instruct" , openai_client=groq_client)
 writer_model = OpenAIChatCompletionsModel(model="meta-llama/llama-4-scout-17b-16e-instruct",openai_client=groq_client)
 
@@ -39,7 +39,7 @@ search_agent= Agent(
     name="search agent",
     instructions=Instructions,
     tools=[websearchtool],
-    # model_settings=ModelSettings(tool_choice="required"),
+    model_settings=ModelSettings(tool_choice="required"),
     model=model1
 )
 
@@ -115,7 +115,7 @@ def send_email(subject:str , html_body:str):
             
             result = resend.Emails.send({
                 "from": os.environ.get("EMAIL_FROM", "Acme <onboarding@resend.dev>"),
-                "to": ["saifihassan656@gmail.com"],
+                "to": ["Youremail@gmail.com"],
                 "subject": subject,
                 "html": html_body,
                 "text": "Welcome! This email was sent using Resend's Python SDK",
